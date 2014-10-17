@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vehicle Processing</title>
+    <title>Toyota Accessory Search</title>
 
     <link rel="stylesheet" href="css/themes/lio.css" />
     <link rel="stylesheet" href="css/themes/icon.css" />
@@ -12,9 +12,57 @@
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery.mobile-1.4.0.min.js"></script>
     <script src="js/jquery.jsonp-2.4.0.min.js"></script>
+	<!-- Countondown -->
+	<style type="text/css">
+		.d-table {
+		 display: block;
+		  width: 1px solid red;
+		}
 
+		.d-table ul {
+		  list-style-type: none;
+		}
+
+		.background {
+			border-style: none;
+			width: 62px;
+			height: 58px;
+		}
+		.numbers {
+			border-style: none;
+			background-color: transparent;
+			padding: 0px;
+			margin: 0px;
+			width: 62px;
+			height: 42px;
+			text-align: center;
+			font-family: Arial;
+			font-size: 34px;
+			font-weight: normal;    /* options are normal, bold, bolder, lighter */
+			color: #FFFFFF;     /* change color using the hexadecimal color codes for HTML */
+		}
+		.title {    /* the styles below will affect the title under the numbers, i.e., “Days”, “Hours”, etc. */
+			border: none;
+			padding: 0px;
+			margin: 0px 3px;
+			width: 62px;
+			text-align: center;
+			font-family: Arial;
+			font-size: 10px;
+			font-weight: normal;    /* options are normal, bold, bolder, lighter */
+			color: #999999;    /* change color using the hexadecimal color codes for HTML */
+			background-color: #000000;
+		}
+
+		.line {
+			border-style: none;
+			width: 62px;
+			height: 2px;
+			z-index: 15;
+		}
+	</style>
+	<!-- End Countdown -->
 </head>
-
 
 <body>
 
@@ -22,22 +70,35 @@
     <div data-role="page" id="one" data-theme="a">
 
         <div data-role="header">
-            <h1>Vehicle Processing</h1>
+            <h1>VPC Appearance Product Installations and Tracking</h1>
         </div><!-- /header -->
 
-        <div data-role="content">
-            <!--form id="searchform" name="searchform"-->
-            <div style="text-align:center"><img src="css/themes/images/toyota-logo.png" /></div><br />
-            <input name="search-1" id="search-1" value="" type="search">
-            <input type="button" id="search" name="search" value="Search VIN">
-            <input type="button" id="scan" name="scan" value="Scan VIN">
+        <div>
+			<h2>Login</h2>
+				<ul class=".d-table ul">
+					<li><label for="usermail">UserName</label>
+						<input type="text" id="username" name="usermail" placeholder="UserName" required></li>
+					<li><label for="password">Password</label>
+						<input type="password" name="password" placeholder="password" required></li>
+					<li><select id="Station"><option value="Lane1">Lane1</option>
+						<option value="Lane2">Lane2</option><option value="Lane3">Lane3</option></select></li>
+					<li><select id="shift"><option value="8">8</option>
+						<option value="9">9</option><option value="10">10</option></select></li>
+				</ul>
+							<input type="submit" value="Login" onclick="showmenu(username.value)">
+
+
+			</div><!-- /page ADMIN -->
+
             <!--/form-->
             <div style="text-align:center"></div><br>
+            <div id="menu" style="display:none">
             <ul data-role="listview" data-ajax="false" data-inset="true">
-                <li><a href="#fourteen">2014</a></li>
-                <li><a href="#thirteen">2013</a></li>
-                <li><a href="#twelve">2012</a></li>
+                <li><a href="#fifteen">ADMIN</a></li>
+                <li><a href="#thirteen" onclick="showTally()">Appearance Product Installations</a></li>
+                <li><a href="#twelve">Installations Tracking Sheet</a></li>
             </ul>
+            </div>
         </div><!-- /content -->
 
         <div data-role="footer" data-theme="a">
@@ -45,548 +106,194 @@
         </div><!-- /footer -->
 
     </div><!-- /page one -->
-    <!-- Start of first page: #2014 -->
-    <div data-role="page" id="fourteen" data-theme="a">
+
+    <!-- Start of Second page: #ADMIN -->
+    <div data-role="page" id="fifteen" data-theme="a">
 
         <div data-role="header">
             <a href="#one" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
-            <h1>Vehicle Processing</h1>
+            <h1>VPC Appearance Product Installations and Tracking</h1>
         </div><!-- /header -->
 
         <div data-role="content" data-theme="a">
-            <h2>2014</h2>
+            <h2></h2>
 
-            <ul data-role="listview" data-inset="true" id="modellist">
-                <li>
-                    <a href="#" onclick="getdata('2014','4-RUNNER')">
-                        <div class="modeldiv">
-                            <img src="img/4runner-front.png">
-                        </div>
-                        <h2>4-Runner</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','AVALON')">
-                        <div class="modeldiv">
-                            <img src="img/avalon-front.png">
-                        </div>
-                        <h2>Avalon</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','CAMRY')">
-                        <div class="modeldiv">
-                            <img src="img/camry-front.png">
-                        </div>
-                        <h2>Camry</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','COROLLA')">
-                        <div class="modeldiv">
-                            <img src="img/corolla-front.png">
-                        </div>
-                        <h2>Corolla</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','FJ CRUISER')">
-                        <div class="modeldiv">
-                            <img src="img/fj-cruiser-front.png">
-                        </div>
-                        <h2>FJ Cruiser</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','HIGHLANDER')">
-                        <div class="modeldiv">
-                            <img src="img/highlander-front.png">
-                        </div>
-                        <h2>Highlander</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','LAND CRUISER')">
-                        <div class="modeldiv">
-                            <img src="img/landcruiser-front.png">
-                        </div>
-                        <h2>Land Cruiser</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','PRIUS')">
-                        <div class="modeldiv">
-                            <img src="img/prius-front.png">
-                        </div>
-                        <h2>Prius</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','PRIUS C')">
-                        <div class="modeldiv">
-                            <img src="img/prius-c-front.png">
-                        </div>
-                        <h2>Prius C</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','PRIUS V')">
-                        <div class="modeldiv">
-                            <img src="img/prius-v-front.png">
-                        </div>
-                        <h2>Prius V</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','RAV-4')">
-                        <div class="modeldiv">
-                            <img src="img/rav4-front.png">
-                        </div>
-                        <h2>Rav-4</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','SEQUOIA')">
-                        <div class="modeldiv">
-                            <img src="img/sequoia-front.png">
-                        </div>
-                        <h2>Sequoia</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','SIENNA')">
-                        <div class="modeldiv">
-                            <img src="img/sienna-front.png">
-                        </div>
-                        <h2>Sienna</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','TACOMA 2W')">
-                        <div class="modeldiv">
-                            <img src="img/tacoma-front.png">
-                        </div>
-                        <h2>Tacoma 2W</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','TACOMA 4W')">
-                        <div class="modeldiv">
-                            <img src="img/tacoma-front.png">
-                        </div>
-                        <h2>Tacoma 4W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','TUNDRA 2W')">
-                        <div class="modeldiv">
-                            <img src="img/tundra-front.png">
-                        </div>
-                        <h2>Tundra 2W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','TUNDRA 4W')">
-                        <div class="modeldiv">
-                            <img src="img/tundra-front.png">
-                        </div>
-                        <h2>Tundra 4W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','VENZA')">
-                        <div class="modeldiv">
-                            <img src="img/venza-front.png">
-                        </div>
-                        <h2>Venza</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2014','YARIS')">
-                        <div class="modeldiv">
-                            <img src="img/yaris-front.png">
-                        </div>
-                        <h2>Yaris</h2>
-                    </a>
-                </li>
-            </ul>
-
-        </div><!-- /content -->
-
+		</div>
         <div data-role="footer">
             <h4>Hackathon 2014</h4>
         </div><!-- /footer -->
-    </div><!-- /page 2013 -->
+    </div><!-- /page Installaction -->
     <!-- Start of first page: #2013 -->
-    <div data-role="page" id="thirteen" data-theme="a">
+      <!-- Start of Second page: #ADMIN -->
+	    <div data-role="page" id="thirteen" data-theme="a">
 
-        <div data-role="header">
-            <a href="#one" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
+	        <div data-role="header">
+	            <a href="#one" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
+	            <h1>VPC Appearance Product Installations and Tracking</h1>
+	        </div><!-- /header -->
 
-            <h1>Vehicle Processing</h1>
-        </div><!-- /header -->
+	        <div data-role="content" data-theme="a">
+	        	<div id="wrapper">
+				    <div id="first" style="display: inline-block;"><h4>Date:&nbsp;&nbsp;&nbsp; </h4></div>
+				    <div id="second" style="display: inline-block;"><label id="lblDate" style="text-decoration: underline;"></label></div>
+				    <div id="third" style="display: inline-block;"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></div>
+				    <div id="fourth" style="display: inline-block;"><h4>Team#&nbsp;&nbsp;&nbsp; </h4></div>
+				    <div id="fifth" style="display: inline-block;"><label id="lblTeam" style="text-decoration: underline;"></label></div>
+				    <div id="sixth" style="display: inline-block;"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></div>
+					<div id="seventh" style="display: inline-block;"><h4>Associates:&nbsp;&nbsp;&nbsp; </h4></div>
+				    <div id="eigth" style="display: inline-block;"><label id="lblUser" style="text-decoration: underline;"></label></div>
+				</div>
+	        </div>
+	        <div class="d-table">
+	        <ul class=".d-table ul">
+				<li>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;background: grey;width: 200px;font-weight:bold;">Accessory Code</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;background: grey;width: 70px;font-weight:bold;">Time</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;background: grey;width: 70px;font-weight:bold;">Quantity</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;background: grey;width: 100px;font-weight:bold;">Total</div>
+				</li>
 
-        <div data-role="content" data-theme="a">
-            <h2>2013</h2>
+				<li>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 200px;">PB All Others</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 70px;">6</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 70px;">3</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 100px;">18</div>
+				</li>
+				<li>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 200px;">CG Highlander</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 70px;">5</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 70px;">1</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 100px;">15</div>
+				</li>
+				<li>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 200px;">PF Highlander</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 70px;">38</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 70px;">1</div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 100px;">38</div>
+				</li>
+	        </ul>
+	        </div>
+	        <div>
+	        <div style="margin-left:25px;">
+	        	<div style="padding: 0px;display: inline-block;width: 200px;font-weight:bold;">Total Cars: 3</div>
+				<div style="padding: 0px;display: inline-block;width: 200px;font-weight:bold;">Total Accessories: 5</div>
+			</div>
+			<div style="margin-left:25px;">
+				<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 300px;background: grey;font-weight:bold;">Total BOM Minutes</div>
+				<div  style="padding: 0px;display: inline-block;border: 1px solid blue;width: 200px;background: grey;font-weight:bold;">Total BOM Hours</div>
+			</div>
+			<div style="margin-left:25px;">
+				<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 300px;">71</div>
+				<div id="BomHrs" style="padding: 0px;display: inline-block;border: 1px solid blue;width: 200px;">1.5</div>
+			</div>
+			</div>
+			<div style="margin-left:25px;">
+				<h4>Productivity</h4>
+				<div style="margin-left:25px;">
+					<div style="padding: 0px;display: inline-block;width: 300px;">Number of Hours:</div>
+					<div style="padding: 0px;display: inline-block;width: 200px;">
+						<select id="Opthours">
+						  <option value="8">8</option>
+						  <option value="9">9</option>
+						  <option value="10">10</option>
+						</select>
+						</div>
+				</div>
+				<div style="margin-left:25px;">
+					<div style="padding: 0px;display: inline-block;width: 300px;">Number of people:</div>
+					<div style="padding: 0px;display: inline-block;width: 200px;">
+						<select id="Optpeople">
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>
+					</div>
+				</div>
+				<div style="padding: 0px;margin-left:25px;width: 300px;"><input type="button" value="Calculate Productivity" onclick="CalculateProd($('#Opthours').val(),$('#Optpeople').val())"></div>
+				<div id="lblProd" style="padding: 0px;margin-left:25px;width: 300px;font-weight:bold;"></div>
+				<div style="padding: 0px;width: 300px;height:100px; overflow: scroll;margin-left:25px;">
+					<textarea name="Notes" rows="10" cols="10">
 
-            <ul data-role="listview" data-inset="true" id="modellist">
-                <li>
-                    <a href="#" onclick="getdata('2013','4-RUNNER')">
-                        <div class="modeldiv">
-                            <img src="img/4runner-front.png">
-                        </div>
-                        <h2>4-Runner</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','AVALON')">
-                        <div class="modeldiv">
-                            <img src="img/avalon-front.png">
-                        </div>
-                        <h2>Avalon</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','CAMRY')">
-                        <div class="modeldiv">
-                            <img src="img/camry-front.png">
-                        </div>
-                        <h2>Camry</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','COROLLA')">
-                        <div class="modeldiv">
-                            <img src="img/corolla-front.png">
-                        </div>
-                        <h2>Corolla</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','FJ CRUISER')">
-                        <div class="modeldiv">
-                            <img src="img/fj-cruiser-front.png">
-                        </div>
-                        <h2>FJ Cruiser</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','HIGHLANDER')">
-                        <div class="modeldiv">
-                            <img src="img/highlander-front.png">
-                        </div>
-                        <h2>Highlander</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','LAND CRUISER')">
-                        <div class="modeldiv">
-                            <img src="img/landcruiser-front.png">
-                        </div>
-                        <h2>Land Cruiser</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','PRIUS')">
-                        <div class="modeldiv">
-                            <img src="img/prius-front.png">
-                        </div>
-                        <h2>Prius</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','PRIUS C')">
-                        <div class="modeldiv">
-                            <img src="img/prius-c-front.png">
-                        </div>
-                        <h2>Prius C</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','PRIUS V')">
-                        <div class="modeldiv">
-                            <img src="img/prius-v-front.png">
-                        </div>
-                        <h2>Prius V</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','RAV-4')">
-                        <div class="modeldiv">
-                            <img src="img/rav4-front.png">
-                        </div>
-                        <h2>Rav-4</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','SEQUOIA')">
-                        <div class="modeldiv">
-                            <img src="img/sequoia-front.png">
-                        </div>
-                        <h2>Sequoia</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','SIENNA')">
-                        <div class="modeldiv">
-                            <img src="img/sienna-front.png">
-                        </div>
-                        <h2>Sienna</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','TACOMA 2W')">
-                        <div class="modeldiv">
-                            <img src="img/tacoma-front.png">
-                        </div>
-                        <h2>Tacoma 2W</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','TACOMA 4W')">
-                        <div class="modeldiv">
-                            <img src="img/tacoma-front.png">
-                        </div>
-                        <h2>Tacoma 4W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','TUNDRA 2W')">
-                        <div class="modeldiv">
-                            <img src="img/tundra-front.png">
-                        </div>
-                        <h2>Tundra 2W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','TUNDRA 4W')">
-                        <div class="modeldiv">
-                            <img src="img/tundra-front.png">
-                        </div>
-                        <h2>Tundra 4W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','VENZA')">
-                        <div class="modeldiv">
-                            <img src="img/venza-front.png">
-                        </div>
-                        <h2>Venza</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2013','YARIS')">
-                        <div class="modeldiv">
-                            <img src="img/yaris-front.png">
-                        </div>
-                        <h2>Yaris</h2>
-                    </a>
-                </li>
-            </ul>
-
-        </div><!-- /content -->
-
-        <div data-role="footer">
-            <h4>Hackathon 2014</h4>
-        </div><!-- /footer -->
-    </div><!-- /page 2013 -->
-    <!-- Start of first page: #2012 -->
+					</textarea>
+				</div>
+			</div>
+	        <div data-role="footer">
+	            <h4>Hackathon 2014</h4>
+	        </div><!-- /footer -->
+    </div><!-- /page Installation -->
+    <!-- Start of first page: Appearance -->
     <div data-role="page" id="twelve" data-theme="a">
 
         <div data-role="header">
             <a href="#one" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
 
-            <h1>Vehicle Processing</h1>
+            <h1>VPC Appearance Product Installations and Tracking</h1>
         </div><!-- /header -->
 
         <div data-role="content" data-theme="a">
+			<h3>Installation Tracking</h3>
+            <div id="wrapper1">
+				<div id="first1" style="display: inline-block;"><h4>Date:&nbsp;&nbsp;&nbsp; </h4></div>
+				<div id="second1" style="display: inline-block;"><label id="lblDate1" style="text-decoration: underline;"></label></div>
+				<div id="third1" style="display: inline-block;"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></div>
+				<div id="fourth1" style="display: inline-block;"><h4>Team#&nbsp;&nbsp;&nbsp; </h4></div>
+				<div id="fifth1" style="display: inline-block;"><label id="lblTeam1" style="text-decoration: underline;"></label></div>
+				<div id="sixth1" style="display: inline-block;"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></div>
+				<div id="seventh1" style="display: inline-block;"><h4>Associates:&nbsp;&nbsp;&nbsp; </h4></div>
+				<div id="eigth1" style="display: inline-block;"><label id="lblUser1" style="text-decoration: underline;"></label></div>
+			</div>
 
-            <h2>2012</h2>
+			<div id="vinscan">
+				<input name="search-1" id="search-1" value="" type="search">
+			    <input type="button" id="search" name="search" value="Search VIN">
+            	<input type="button" id="scan" name="scan" value="Scan VIN">
+			</div>
 
-            <ul data-role="listview" data-inset="true" id="modellist">
-                <li>
-                    <a href="#" onclick="getdata('2012','4-RUNNER')">
-                        <div class="modeldiv">
-                            <img src="img/4runner-front.png">
-                        </div>
-                        <h2>4-Runner</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','AVALON')">
-                        <div class="modeldiv">
-                            <img src="img/avalon-front.png">
-                        </div>
-                        <h2>Avalon</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','CAMRY')">
-                        <div class="modeldiv">
-                            <img src="img/camry-front.png">
-                        </div>
-                        <h2>Camry</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','COROLLA')">
-                        <div class="modeldiv">
-                            <img src="img/corolla-front.png">
-                        </div>
-                        <h2>Corolla</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','FJ CRUISER')">
-                        <div class="modeldiv">
-                            <img src="img/fj-cruiser-front.png">
-                        </div>
-                        <h2>FJ Cruiser</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','HIGHLANDER')">
-                        <div class="modeldiv">
-                            <img src="img/highlander-front.png">
-                        </div>
-                        <h2>Highlander</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','LAND CRUISER')">
-                        <div class="modeldiv">
-                            <img src="img/landcruiser-front.png">
-                        </div>
-                        <h2>Land Cruiser</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','PRIUS')">
-                        <div class="modeldiv">
-                            <img src="img/prius-front.png">
-                        </div>
-                        <h2>Prius</h2>
-                    </a>
+			<div id="InstallTimer" style="display:none;margin-left:25px;">
+				<div>
+					<div style="padding: 0px;display: inline-block;border: 1px solid blue;width: 500px;background: grey;font-weight:bold;">Vehicle Description: Tundra TSS</div>
+				</div>
+				<div>
+				<h3> Time Left for Installation</h3>
+				<div>
 
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','PRIUS C')">
-                        <div class="modeldiv">
-                            <img src="img/prius-c-front.png">
-                        </div>
-                        <h2>Prius C</h2>
-                    </a>
+				    <div class="title" id="seconds" style="display: inline-block;" >Hours</div>
 
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','PRIUS V')">
-                        <div class="modeldiv">
-                            <img src="img/prius-v-front.png">
-                        </div>
-                        <h2>Prius V</h2>
-                    </a>
+				    <div class="title" id="minutes" style="display: inline-block;" >Minutes</div>
 
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','RAV-4')">
-                        <div class="modeldiv">
-                            <img src="img/rav4-front.png">
-                        </div>
-                        <h2>Rav-4</h2>
-                    </a>
+				    <div class="title" id="seconds" style="display: inline-block;" >Seconds</div>
+				</div>
+				<!--<div>
+				    <div class="title" id="hours" style="display: inline-block;left: 138px;" >Hours</div>
+				    <div class="title" id="minutes" style="display: inline-block;left: 210px;" >Minutes</div>
+    				<div class="title" id="seconds" style="display: inline-block;left: 282px;" >Seconds</div>
+    			</div>-->
+				</div>
+    			<div>
+					<h4>Accessories to be installed</h4>
+						<div class="d-table">
+							<ul data-role="listview" data-inset="true" id="modellist">
+							 	<li>
+							 		<a href="#" onclick="getdata('2013','4-RUNNER')">
+							        <div class="modeldiv">
+							        <img src="img/4runner-front.png">
+							        </div>
+							        <h2>Accessory: BD</h2>
+							        </a>
+                				</li>
+                				<li>
+									<a href="#" onclick="getdata('2013','4-RUNNER')">
+									<div class="modeldiv">
+									<img src="img/4runner-front.png">
+									</div>
+									<h2>Accessory: D6</h2>
+									</a>
+                				</li>
+                			</ul>
+	        			</div>
+						<div data-role="collapsible-set" id="partlist"></div>
+				</div>
+			</div>
 
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','SEQUOIA')">
-                        <div class="modeldiv">
-                            <img src="img/sequoia-front.png">
-                        </div>
-                        <h2>Sequoia</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','SIENNA')">
-                        <div class="modeldiv">
-                            <img src="img/sienna-front.png">
-                        </div>
-                        <h2>Sienna</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','TACOMA 2W')">
-                        <div class="modeldiv">
-                            <img src="img/tacoma-front.png">
-                        </div>
-                        <h2>Tacoma 2W</h2>
-                    </a>
-
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','TACOMA 4W')">
-                        <div class="modeldiv">
-                            <img src="img/tacoma-front.png">
-                        </div>
-                        <h2>Tacoma 4W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','TUNDRA 2W')">
-                        <div class="modeldiv">
-                            <img src="img/tundra-front.png">
-                        </div>
-                        <h2>Tundra 2W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','TUNDRA 4W')">
-                        <div class="modeldiv">
-                            <img src="img/tundra-front.png">
-                        </div>
-                        <h2>Tundra 4W</h2>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','VENZA')">
-                        <div class="modeldiv">
-                            <img src="img/venza-front.png">
-                        </div>
-                        <h2>Venza</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" onclick="getdata('2012','YARIS')">
-                        <div class="modeldiv">
-                            <img src="img/yaris-front.png">
-                        </div>
-                        <h2>Yaris</h2>
-                    </a>
-                </li>
-            </ul>
 
         </div><!-- /content -->
 
@@ -599,7 +306,7 @@
 
         <div data-role="header">
             <a href="#one" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back">Back</a>
-            <h1>Vehicle Processing</h1>
+            <h1>VPC Appearance Product Installations and Tracking</h1>
         </div><!-- /header -->
 
         <div data-role="content" data-theme="a">
@@ -622,5 +329,6 @@
     <script type="text/javascript">
         app.initialize();
     </script>
+
 </body>
 </html>
