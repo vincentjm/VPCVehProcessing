@@ -75,18 +75,25 @@
 
         <div>
 			<h2>Login</h2>
-				<ul class=".d-table ul">
-					<li><label for="usermail">UserName</label>
-						<input type="text" id="username" name="usermail" placeholder="UserName" required></li>
-					<li><label for="password">Password</label>
+			<div  class=".d-table ">
+				<ul style="list-style-type: none;">
+					<li>
+						<div style="padding: 0px;display: inline-block;font-weight:bold;">
+							UserName:
+						</div>
+						<div style="padding: 0px;display: inline-block;">
+							<input type="text" id="username" name="usermail" placeholder="UserName" required>
+						</div>
+					</li>
+					<li><label for="lblpassword">Password</label>
 						<input type="password" name="password" placeholder="password" required></li>
-					<li><select id="Station"><option value="Lane1">Lane1</option>
+					<li><label for="lblststion">Station:</label><select id="Station"><option value=""></option><option value="Lane1">Lane1</option>
 						<option value="Lane2">Lane2</option><option value="Lane3">Lane3</option></select></li>
-					<li><select id="shift"><option value="8">8</option>
+					<li><label for="lblShift">Shift:</label><select id="shift"><option value="0"></option><option value="8">8</option>
 						<option value="9">9</option><option value="10">10</option></select></li>
 				</ul>
 							<input type="submit" value="Login" onclick="showmenu(username.value)">
-
+			</div>
 
 			</div><!-- /page ADMIN -->
 
